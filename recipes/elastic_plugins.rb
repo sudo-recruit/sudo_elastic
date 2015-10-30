@@ -1,17 +1,18 @@
 package 'maven'
+home_path=node['sudo_elastic']['home_path']
 
-git '/home/vagrant/elasticsearch-analysis-ik' do
+git "#{home_path}/elasticsearch-analysis-ik" do
   repository 'https://github.com/medcl/elasticsearch-analysis-ik'
   revision 'master'
 end
 
 bash 'mvn compile' do
-  cwd '/home/vagrant/elasticsearch-analysis-ik'
+  cwd "#{home_path}/elasticsearch-analysis-ik"
   code 'mvn compile'
 end
 
 bash 'mvn package' do
-  cwd '/home/vagrant/elasticsearch-analysis-ik'
+  cwd "#{home_path}/elasticsearch-analysis-ik"
   code 'mvn package'
 end
 
@@ -28,13 +29,13 @@ directory '/usr/local/elasticsearch/plugins/ik' do
 end
 
 file '/usr/local/elasticsearch/plugins/ik/elasticsearch-analysis-ik-1.4.1-jar-with-dependencies.jar' do
-  content lazy {IO.read('/home/vagrant/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-1.4.1-jar-with-dependencies.jar')}
+  content lazy {IO.read("#{home_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-1.4.1-jar-with-dependencies.jar")}
   action :create
   group 'elasticsearch'
   user 'elasticsearch'
 end
 
-from_path='/home/vagrant/elasticsearch-analysis-ik/config/ik/'
+from_path="#{home_path}/elasticsearch-analysis-ik/config/ik/"
 to_path='/usr/local/etc/elasticsearch/ik/'
 
 directory '/usr/local/etc/elasticsearch/ik' do
