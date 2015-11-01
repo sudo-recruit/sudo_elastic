@@ -20,7 +20,7 @@ GRAPH
     curl (>= 0.0.0)
     yum (>= 0.0.0)
   java (1.35.0)
-  sudo_elastic (0.0.1)
+  sudo_elastic (0.0.2)
     apt (~> 2.9.2)
     elasticsearch (~> 1.0.3)
     java (>= 0.0.0)

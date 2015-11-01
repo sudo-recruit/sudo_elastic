@@ -3,7 +3,7 @@ home_path=node['sudo_elastic']['home_path']
 
 git "#{home_path}/elasticsearch-analysis-ik" do
   repository 'https://github.com/medcl/elasticsearch-analysis-ik'
-  revision 'master'
+  revision 'v1.4.1'
 end
 
 bash 'mvn compile' do
@@ -48,7 +48,7 @@ directory '/usr/local/etc/elasticsearch/ik/custom' do
   user 'elasticsearch'
 end
 
-#stupid way to copy file 
+#stupid way to copy file
 files=['IKAnalyzer.cfg.xml','main.dic','quantifier.dic','suffix.dic','preposition.dic','stopword.dic','surname.dic',
        'custom/ext_stopword.dic','custom/single_word.dic','custom/single_word_low_freq.dic',
        'custom/mydict.dic','custom/single_word_full.dic','custom/sougou.dic']
