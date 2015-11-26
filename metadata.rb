@@ -6,4 +6,4 @@ supports "ubuntu"
 
 depends 'java'
 depends 'apt', '~> 2.9.2'
-depends 'elasticsearch', '~> 1.0.3'
+depends 'elasticsearch', '~> 2.0.0'
