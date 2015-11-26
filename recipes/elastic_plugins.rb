@@ -3,7 +3,7 @@ home_path=node['sudo_elastic']['home_path']
 
 git "#{home_path}/elasticsearch-analysis-ik" do
   repository 'https://github.com/medcl/elasticsearch-analysis-ik'
-  revision 'v1.4.1'
+  revision 'v1.5.0'
 end
 
 bash 'mvn compile' do
@@ -18,34 +18,41 @@ end
 
 #
 
-directory '/usr/local/elasticsearch/plugins' do
-  group 'elasticsearch'
-  user 'elasticsearch'
+directory '/usr/share/elasticsearch/plugins' do
+  group 'root'
+  user 'root'
 end
 
-directory '/usr/local/elasticsearch/plugins/ik' do
-  group 'elasticsearch'
-  user 'elasticsearch'
+directory '/usr/share/elasticsearch/plugins/ik' do
+  group 'root'
+  user 'root'
 end
 
-file '/usr/local/elasticsearch/plugins/ik/elasticsearch-analysis-ik-1.4.1-jar-with-dependencies.jar' do
-  content lazy {IO.read("#{home_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-1.4.1-jar-with-dependencies.jar")}
+file "/usr/share/elasticsearch/plugins/ik/elasticsearch-analysis-ik-1.5.0.zip" do
+  content lazy {IO.read("#{home_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-1.5.0.zip")}
   action :create
-  group 'elasticsearch'
-  user 'elasticsearch'
+  group 'root'
+  user 'root'
+end
+
+bash 'unzip ik' do
+  cwd "/usr/share/elasticsearch/plugins/ik"
+  code 'unzip elasticsearch-analysis-ik-1.5.0.zip'
+  group 'root'
+  user 'root'
 end
 
 from_path="#{home_path}/elasticsearch-analysis-ik/config/ik/"
-to_path='/usr/local/etc/elasticsearch/ik/'
+to_path='/etc/elasticsearch/ik/'
 
-directory '/usr/local/etc/elasticsearch/ik' do
-  group 'elasticsearch'
-  user 'elasticsearch'
+directory '/etc/elasticsearch/ik' do
+  group 'root'
+  user 'root'
 end
 
-directory '/usr/local/etc/elasticsearch/ik/custom' do
-  group 'elasticsearch'
-  user 'elasticsearch'
+directory '/etc/elasticsearch/ik/custom' do
+  group 'root'
+  user 'root'
 end
 
 #stupid way to copy file
@@ -57,7 +64,7 @@ files.each do|f|
   file "#{to_path}#{f}" do
     content lazy {IO.read("#{from_path}#{f}")}
     action :create
-    group 'elasticsearch'
-    user 'elasticsearch'
+    group 'root'
+    user 'root'
   end
 end
