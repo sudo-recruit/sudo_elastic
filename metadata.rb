@@ -1,5 +1,5 @@
 name "sudo_elastic"
-version "0.1.1"
+version "0.1.2"
 maintainer "ocowchun"
 maintainer_email "ben.yeh@sudo.com.tw"
 supports "ubuntu"

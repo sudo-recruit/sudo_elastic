@@ -1,6 +1,6 @@
 package 'maven'
 home_path=node['sudo_elastic']['home_path']
-ik_version=node['ik']['version']
+ik_version=node['sudo_elastic']['ik']['version']
 
 ik_revision="v#{ik_version}"
 ik_revision='master' if ik_version=='master'
