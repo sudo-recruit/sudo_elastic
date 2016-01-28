@@ -1,9 +1,13 @@
 package 'maven'
 home_path=node['sudo_elastic']['home_path']
+ik_version=node['ik']['version']
+
+ik_revision="v#{ik_version}"
+ik_revision='master' if ik_version=='master'
 
 git "#{home_path}/elasticsearch-analysis-ik" do
   repository 'https://github.com/medcl/elasticsearch-analysis-ik'
-  revision 'v1.6.0'
+  revision "#{ik_revision}"
 end
 
 bash 'mvn compile' do
@@ -28,8 +32,8 @@ directory '/usr/share/elasticsearch/plugins/ik' do
   user 'root'
 end
 
-file "/usr/share/elasticsearch/plugins/ik/elasticsearch-analysis-ik-1.6.0.zip" do
-  content lazy {IO.read("#{home_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-1.6.0.zip")}
+file "/usr/share/elasticsearch/plugins/ik/elasticsearch-analysis-ik-#{ik_version}.zip" do
+  content lazy {IO.read("#{home_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-#{ik_version}.zip")}
   action :create
   group 'root'
   user 'root'
@@ -37,7 +41,7 @@ end
 
 bash 'unzip ik' do
   cwd "/usr/share/elasticsearch/plugins/ik"
-  code 'unzip elasticsearch-analysis-ik-1.6.0.zip'
+  code 'unzip elasticsearch-analysis-ik-#{ik_version}.zip'
   group 'root'
   user 'root'
 end
