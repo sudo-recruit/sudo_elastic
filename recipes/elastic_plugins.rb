@@ -41,7 +41,7 @@ end
 
 bash 'unzip ik' do
   cwd "/usr/share/elasticsearch/plugins/ik"
-  code 'unzip elasticsearch-analysis-ik-#{ik_version}.zip'
+  code "unzip elasticsearch-analysis-ik-#{ik_version}.zip"
   group 'root'
   user 'root'
 end
