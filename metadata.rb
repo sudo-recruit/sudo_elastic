@@ -9,4 +9,4 @@ long_description IO.read(File.join(File.dirname(__FILE__), "README.md"))
 
 depends "java"
 depends "apt", "~> 2.9.2"
-depends "elasticsearch", "~> 2.1.0"
+depends "elasticsearch", "~> 2.2.0"

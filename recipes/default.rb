@@ -7,14 +7,11 @@ package 'git'
 package 'vim'
 package 'zip'
 
-
-include_recipe "sudo_elastic::elastic_plugins"
-
 # set elastic search config
 elasticsearch_configure 'elasticsearch' do
   configuration ({
-                   'cluster.name' => 'escluster',
-                   'node.name' => 'node01',
+                   'cluster.name' => node['sudo_elastic']['elastic_search']['cluster']['name'],
+                   'node.name' => node['sudo_elastic']['elastic_search']['node']['name'],
                    'network.host' => node['sudo_elastic']['elastic_search']['network_host']
   })
 end
