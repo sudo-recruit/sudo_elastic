@@ -16,6 +16,10 @@ elasticsearch_configure 'elasticsearch' do
   })
 end
 
+elasticsearch_plugin 'kopf' do
+  url 'lmenezes/elasticsearch-kopf/2.1.2'
+end
+
 bash 'start elastic search' do
   code 'sudo service elasticsearch restart'
 end
