@@ -1,3 +1,6 @@
+##0.1.7
+* add consul recipes
+
 ##0.1.6
 * upgrade elasticsearch to 2.3
 
