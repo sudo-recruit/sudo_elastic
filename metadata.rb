@@ -1,5 +1,5 @@
 name "sudo_elastic"
-version "0.1.7"
+version "0.1.8"
 maintainer "ocowchun"
 maintainer_email "ben.yeh@sudo.com.tw"
 license  "MIT"

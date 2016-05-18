@@ -1,3 +1,5 @@
+include_recipe "elasticsearch::default"
+
 package 'maven'
 home_path=node['sudo_elastic']['home_path']
 ik_version=node['sudo_elastic']['ik']['version']
@@ -71,4 +73,27 @@ files.each do|f|
     group 'root'
     user 'root'
   end
+end
+
+directory '/etc/elasticsearch/analysis' do
+  group 'root'
+  user 'root'
+end
+
+template "/etc/elasticsearch/analysis/synonym.txt" do
+  source "synonym.txt"
+end
+
+elasticsearch_configure 'elasticsearch' do
+  configuration ({
+                   'cluster.name' => node['sudo_elastic']['elastic_search']['cluster']['name'],
+                   'node.name' => node['sudo_elastic']['elastic_search']['node']['name'],
+                   'network.host' => node['sudo_elastic']['elastic_search']['network_host'],
+                   'index.analysis.filter.sudo_synonym.type'=>'synonym',
+                   'index.analysis.filter.sudo_synonym.synonyms_path'=>'"analysis/synonym.txt"',
+                   'index.analysis.analyzer.sudo_analyzer.type'=>'custom',
+                   'index.analysis.analyzer.sudo_analyzer.char_filter'=>'html_strip',
+                   'index.analysis.analyzer.sudo_analyzer.tokenizer'=>'ik_smart',
+                   'index.analysis.analyzer.sudo_analyzer.filter'=>'[lowercase, sudo_synonym]'
+  })
 end

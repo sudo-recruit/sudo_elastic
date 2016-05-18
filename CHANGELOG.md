@@ -1,3 +1,7 @@
+##0.1.8
+* update ik version to 1.9 to support elasticsearch 2.3
+* add sudo_analyzer
+
 ##0.1.7
 * add consul recipes
 
