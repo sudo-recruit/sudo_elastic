@@ -17,6 +17,9 @@ install [consul](https://www.consul.io/)
 * `['consul']['config']['node_name']` - consul node name(default:`my_elastic_search`)
 * `['consul']['config']['start_join']` - consul agent to join (i.e. `%w{172.20.20.11}`)
 
+##sudo_elastic::monit
+install [monit](https://mmonit.com/monit/)
+
 ##todo
 * write test
 
