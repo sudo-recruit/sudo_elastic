@@ -1,3 +1,6 @@
+##0.1.10
+* fix monit config
+
 ##0.1.9
 * add monit 
 

@@ -57,7 +57,7 @@ GRAPH
     windows (>= 1.2.2)
   sudo_consul_service (0.0.4)
     consul (~> 1.4.3)
-  sudo_elastic (0.1.8)
+  sudo_elastic (0.1.10)
     apt (~> 2.9.2)
     elasticsearch (~> 2.3.0)
     java (>= 0.0.0)
