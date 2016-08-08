@@ -25,40 +25,40 @@ end
 #
 
 directory '/usr/share/elasticsearch/plugins' do
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 directory '/usr/share/elasticsearch/plugins/ik' do
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 file "/usr/share/elasticsearch/plugins/ik/elasticsearch-analysis-ik-#{ik_version}.zip" do
   content lazy {IO.read("#{home_path}/elasticsearch-analysis-ik/target/releases/elasticsearch-analysis-ik-#{ik_version}.zip")}
   action :create
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 bash 'unzip ik' do
   cwd "/usr/share/elasticsearch/plugins/ik"
   code "unzip elasticsearch-analysis-ik-#{ik_version}.zip"
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 from_path="#{home_path}/elasticsearch-analysis-ik/config/ik/"
 to_path='/etc/elasticsearch/ik/'
 
 directory '/etc/elasticsearch/ik' do
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 directory '/etc/elasticsearch/ik/custom' do
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 #stupid way to copy file
@@ -70,14 +70,14 @@ files.each do|f|
   file "#{to_path}#{f}" do
     content lazy {IO.read("#{from_path}#{f}")}
     action :create
-    group 'root'
-    user 'root'
+    group 'elasticsearch'
+    user 'elasticsearch'
   end
 end
 
 directory '/etc/elasticsearch/analysis' do
-  group 'root'
-  user 'root'
+  group 'elasticsearch'
+  user 'elasticsearch'
 end
 
 template "/etc/elasticsearch/analysis/synonym.txt" do
